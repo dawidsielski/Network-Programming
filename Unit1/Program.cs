@@ -11,7 +11,7 @@ namespace Unit1
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            Console.ReadKey();
+            //Console.ReadKey();
 
             Random r = new Random();
 
@@ -24,34 +24,57 @@ namespace Unit1
                 Console.ForegroundColor = (ConsoleColor)r.Next(0, 16);
                 Console.WriteLine(Convert.ToString(a_n));
                 System.Threading.Thread.Sleep(100);
-                Console.SetCursorPosition(20, Convert.ToInt32(n) + 1);
-                //Console.WriteLine(Convert.ToString(sum));
-                Console.SetCursorPosition(0, Convert.ToInt16(n));
                 n++;
 
-                Console.ResetColor();
-                int currentLineCursor = Console.CursorTop;
-                Console.SetCursorPosition(0, Console.CursorTop);
-                Console.Write(new string(' ', Console.WindowWidth));
-                Console.SetCursorPosition(0, currentLineCursor);
+                //gotoxy(1, 40, Convert.ToString(sum));
 
                 int x = Console.CursorLeft;
                 int y = Console.CursorTop;
-                Console.CursorTop = Console.WindowTop + Console.WindowHeight - 1;
-                Console.CursorLeft = Console.WindowLeft + Console.WindowWidth - 50;
+
+                Console.CursorTop = Console.WindowTop + 5;
+                Console.CursorLeft = Console.WindowLeft + 30;
+                Console.ResetColor();
                 Console.Write(Convert.ToString(sum));
+
+                Console.CursorTop = Console.WindowTop + 4;
+                Console.CursorLeft = Console.WindowLeft + 30;
+
+                Console.Write(new string(' ', 40));
+
                 Console.SetCursorPosition(x, y);
+
+                #region
+                //Console.ResetColor();
+                //int currentLineCursor = Console.CursorTop;
+                //Console.SetCursorPosition(0, Console.CursorTop);
+                //Console.Write(new string(' ', Console.WindowWidth));
+                //Console.SetCursorPosition(0, currentLineCursor);
+
+                //int x = Console.CursorLeft;
+                //int y = Console.CursorTop;
+                //Console.CursorTop = Console.WindowTop + Console.WindowHeight - 1;
+                //Console.CursorLeft = Console.WindowLeft + Console.WindowWidth - 50;
+                //Console.Write(Convert.ToString(sum));
+                //Console.SetCursorPosition(x, y);
+                #endregion
             }
         }
 
-        //static void gotoxy(int x, int y)
-        //{
-        //    int x = Console.CursorLeft;
-        //    int y = Console.CursorTop;
-        //    Console.CursorTop = Console.WindowTop + Console.WindowHeight - 1;
-        //    Console.Write(Convert.ToString(sum));
-        //    // Restore previous position
-        //    Console.SetCursorPosition(x, y);
-        //}
+        static void gotoxy(int x, int y, string text)
+        {
+            int x_original = Console.CursorLeft;
+            int y_original = Console.CursorTop;
+
+            Console.ResetColor();
+            int currentLineCursor = Console.CursorTop;  
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, currentLineCursor);
+
+            Console.CursorTop = Console.WindowTop + Console.WindowHeight - x;
+            Console.CursorLeft = Console.WindowLeft + Console.WindowWidth - y;
+            Console.Write(text);
+            Console.SetCursorPosition(x_original, y_original);
+        }
     }
 }
